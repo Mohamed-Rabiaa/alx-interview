@@ -32,6 +32,7 @@ pattern = (
     r'"GET /projects/260 HTTP/1.1" \d{3} \d+$'
 )
 
+
 def signal_handler(sig, frame):
     """
     This function handles the SIGINT signal (Ctrl+C)
@@ -55,6 +56,7 @@ def log_parsing():
                 lst = []
                 count = 0
 
+
 def print_stats():
     """
     This function prints the statistics
@@ -64,11 +66,12 @@ def print_stats():
         file_size += int(text.split()[8])
         key = text.split()[7]
         if key in status_codes_count.keys():
-            status_codes_count[key] += 1 
+            status_codes_count[key] += 1
     print("File size: {}".format(file_size))
-    for k, v in sorted(status_codes_count.items()):
-        if v > 0:
-            print("{}: {}".format(k, v))
+    for k in sorted(status_codes_count.keys()):
+        if status_codes_count[k] > 0:
+            print("{}: {}".format(k, status_codes_count[k]))
+
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
