@@ -32,13 +32,11 @@ pattern = (
     r'"GET /projects/260 HTTP/1.1" \d{3} \d+$'
 )
 
-
+"""
 def signal_handler(sig, frame):
-    """
-    This function handles the SIGINT signal (Ctrl+C)
-    """
     print_stats()
     sys.exit(0)
+"""
 
 
 def log_parsing():
@@ -56,10 +54,10 @@ def log_parsing():
                     print_stats()
                     lst = []
                     count = 0
-
     except KeyboardInterrupt:
         print_stats()
         raise
+
 
 def print_stats():
     """
