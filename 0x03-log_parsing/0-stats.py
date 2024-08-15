@@ -56,10 +56,10 @@ def log_parsing():
                     print_stats()
                     lst = []
                     count = 0
+
     except KeyboardInterrupt:
         print_stats()
         raise
-
 
 def print_stats():
     """
@@ -78,5 +78,5 @@ def print_stats():
 
 
 if __name__ == '__main__':
-    signal.signal(signal.SIGINT, signal_handler)
+    # signal.signal(signal.SIGINT, signal_handler)
     log_parsing()
