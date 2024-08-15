@@ -47,14 +47,18 @@ def log_parsing():
     """
     global lst
     count = 0
-    for line in sys.stdin:
-        if re.match(pattern, line):
-            lst.append(line.strip())
-            count += 1
-            if count == 10:
-                print_stats()
-                lst = []
-                count = 0
+    try:
+        for line in sys.stdin:
+            if re.match(pattern, line):
+                lst.append(line.strip())
+                count += 1
+                if count == 10:
+                    print_stats()
+                    lst = []
+                    count = 0
+    except KeyboardInterrupt:
+        print_stats()
+        raise
 
 
 def print_stats():
@@ -63,8 +67,8 @@ def print_stats():
     """
     global file_size, lst, status_codes_count
     for text in lst:
-        file_size += int(text.split()[8])
-        key = text.split()[7]
+        file_size += int(text.split()[-1])
+        key = text.split()[-2]
         if key in status_codes_count.keys():
             status_codes_count[key] += 1
     print("File size: {}".format(file_size))
