@@ -32,11 +32,10 @@ pattern = (
     r'"GET /projects/260 HTTP/1.1" \d{3} \d+$'
 )
 
-"""
+
 def signal_handler(sig, frame):
     print_stats()
     sys.exit(0)
-"""
 
 
 def log_parsing():
@@ -45,18 +44,17 @@ def log_parsing():
     """
     global lst
     count = 0
-    try:
-        for line in sys.stdin:
-            if re.match(pattern, line):
-                lst.append(line.strip())
-                count += 1
-                if count == 10:
-                    print_stats()
+    for line in sys.stdin:
+        if re.match(pattern, line):
+            lst.append(line.strip())
+            count += 1
+            if count == 10:
+                print_stats()
+                if len(lst) == 10:
                     lst = []
                     count = 0
-    except KeyboardInterrupt:
+    if file_size >= 0:
         print_stats()
-        raise
 
 
 def print_stats():
@@ -76,5 +74,5 @@ def print_stats():
 
 
 if __name__ == '__main__':
-    # signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
     log_parsing()
