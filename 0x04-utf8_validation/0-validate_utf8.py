@@ -1,7 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""
+This module contains the validUTF8 function
+"""
 
 
 def validUTF8(data):
+    """
+    validUTF8 function
+    """
     n_bytes = 0  # Number of bytes in the current UTF-8 character
 
     # Masks to check the most significant bits (MSBs)
