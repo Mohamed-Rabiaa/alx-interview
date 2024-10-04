@@ -28,6 +28,9 @@ def isWinner(x, nums):
         win an equal number of rounds).
     """
     # Step 1: Precompute primes up to 10000 using Sieve of Eratosthenes
+    if x <= 0:
+        return None
+
     max_n = max(nums)
     is_prime = [True] * (max_n + 1)
     is_prime[0], is_prime[1] = False, False
